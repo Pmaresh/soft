@@ -39,3 +39,14 @@ export interface UPITransactionDTO {
   balanceAfterTransaction: number;
   transactionPassword: string;
 }
+
+export interface AccountRequestDTO {
+  id: number;
+  accountNo: string;
+  accountType: string;
+  status: string;
+  createdAt: string; // Using string to represent LocalDateTime
+  approvedAt: string; // Using string to represent LocalDateTime
+  aadharPdf: string; // Using Uint8Array to represent byte[]
+  passportPhoto: string; // Using Uint8Array to represent byte[]
+}

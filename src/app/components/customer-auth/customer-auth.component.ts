@@ -7,29 +7,31 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-customer-auth',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './customer-auth.component.html',
   styleUrl: './customer-auth.component.css'
 })
 export class CustomerAuthComponent {
 
   view: 'login' | 'register' | 'forgot-username' | 'reset-password' = 'login';
- 
+  isModalVisible = false;
+  modalMessage = '';
+
   loginData = { username: '', password: '' };
   registerData = { username: '', email: '', accountNo: '', authPin: '', loginPassword: '', transactionPassword: '' };
   forgotUsernameData = { authPin: '' };
   resetPasswordData = { authPin: '', newPassword: '' };
- 
+
   constructor(private authService: AuthService, private router: Router) {}
- 
+
   setView(view: 'login' | 'register' | 'forgot-username' | 'reset-password') {
     this.view = view;
   }
- 
+
   onLogin() {
     this.authService.login(this.loginData).subscribe(
       (response: string) => {
-        alert(response);
+        this.showModal(response);
         localStorage.setItem('username', this.loginData.username); // Store username
         this.router.navigate(['/details']);
       },
@@ -38,11 +40,11 @@ export class CustomerAuthComponent {
       }
     );
   }
- 
+
   onRegister() {
     this.authService.register(this.registerData).subscribe(
       (response: string) => {
-        alert(response);
+        this.showModal(response);
         this.setView('login');
       },
       error => {
@@ -50,11 +52,11 @@ export class CustomerAuthComponent {
       }
     );
   }
- 
+
   onForgotUsername() {
     this.authService.forgotUsername(this.forgotUsernameData).subscribe(
       (response: string) => {
-        alert(response);
+        this.showModal(response);
         this.setView('login');
       },
       error => {
@@ -62,11 +64,11 @@ export class CustomerAuthComponent {
       }
     );
   }
- 
+
   onResetPassword() {
     this.authService.resetLoginPassword(this.resetPasswordData).subscribe(
       (response: string) => {
-        alert(response);
+        this.showModal(response);
         this.setView('login');
       },
       error => {
@@ -74,7 +76,7 @@ export class CustomerAuthComponent {
       }
     );
   }
- 
+
   private handleError(error: any) {
     let errorMessage = 'An error occurred';
     if (error.error instanceof ErrorEvent) {
@@ -86,6 +88,15 @@ export class CustomerAuthComponent {
     } else if (error.status && error.statusText) {
       errorMessage = `Error ${error.status}: ${error.statusText}`;
     }
-    alert(errorMessage);
+    this.showModal(errorMessage);
+  }
+
+  showModal(message: string) {
+    this.modalMessage = message;
+    this.isModalVisible = true;
+  }
+
+  closeModal() {
+    this.isModalVisible = false;
   }
 }

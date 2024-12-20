@@ -18,9 +18,13 @@ export class UserDetailsComponent {
     upiId: '',
     balance: 0
   };
+
+  isModalVisible = false;
+  modalMessage = '';
   transactions: TransactionSummaryDTO[] = [];
   dateRange = { startDate: '', endDate: '' };
   selectedSection: string = 'home';
+  transactionSuccessMessage: string = '';
   transaction: Partial<NEFTTransactionDTO & UPITransactionDTO> = {
     fromAccount: '',
     toAccount: '',
@@ -31,7 +35,8 @@ export class UserDetailsComponent {
     remarks: '',
     transactionDate: '',
     balanceAfterTransaction: 0,
-    transactionPassword: ''
+    transactionPassword: '',
+    
   };
  
   constructor(private dashboardService: DashboardService) {}
@@ -62,7 +67,12 @@ export class UserDetailsComponent {
     if (this.dateRange.startDate && this.dateRange.endDate) {
       this.dashboardService.getTransactionHistoryCustom(this.userDetails.accountNo, this.userDetails.upiId, this.dateRange.startDate, this.dateRange.endDate).subscribe(
         transactions => {
-          this.transactions = transactions;
+          // Replace UPI IDs with account numbers
+          this.transactions = transactions.map(transaction => ({
+            ...transaction,
+            fromAccount: transaction.fromUpiId ? this.userDetails.accountNo : transaction.fromAccount,
+            toAccount: transaction.toUpiId ? this.userDetails.accountNo : transaction.toAccount
+          }));
         },
         error => {
           console.error('Error fetching transaction history:', error);
@@ -82,18 +92,19 @@ export class UserDetailsComponent {
       balanceAfterTransaction: 0,
       transactionPassword: this.transaction.transactionPassword!
     };
- 
+  
     this.dashboardService.performNeftTransaction(neftTransaction).subscribe(
       response => {
         console.log(response);
-        alert('NEFT Transaction successful');
+        this.transactionSuccessMessage = 'NEFT Transaction successful';
       },
       error => {
         console.error('Error performing NEFT transaction:', error);
-        alert('NEFT Transaction failed');
+        this.transactionSuccessMessage = 'NEFT Transaction failed';
       }
     );
   }
+  
  
   sendUpi(): void {
     const upiTransaction: UPITransactionDTO = {
@@ -106,15 +117,15 @@ export class UserDetailsComponent {
       balanceAfterTransaction: 0,
       transactionPassword: this.transaction.transactionPassword!
     };
- 
+  
     this.dashboardService.performUpiTransaction(upiTransaction).subscribe(
       response => {
         console.log(response);
-        alert('UPI Transaction successful');
+        this.transactionSuccessMessage = 'UPI Transaction successful';
       },
       error => {
         console.error('Error performing UPI transaction:', error);
-        alert('UPI Transaction failed');
+        this.transactionSuccessMessage = 'UPI Transaction failed';
       }
     );
   }
