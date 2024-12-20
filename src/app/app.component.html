@@ -1,42 +1,44 @@
 <header class="fixed-top">
-    <div class="container">
-        <div class="logo">
-            <img src="images/banklogo.jpg" alt="Logo" height="80" width="100">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="logo">
+                    <img src="images/banklogo.jpg" alt="Logo" height="80" width="100" style="border-radius: 20px;">
+                </div>
+            </div>
+            <div class="col-sm-8" style="text-align: center;">
+                <nav>
+                    <ul>
+                        <li><a class="active" routerLink="/"><i class="fa fa-fw fa-home"></i>Home</a></li>
+                        <li><a routerLink="#"><i class="fa fa-fw fa-building"></i>Investment&Insurance</a></li>
+                        <li><a routerLink="#"><i class="fa fa-fw fa-gift"></i>Offers</a></li>
+                        <li><a routerLink="#"><i class="fa fa-fw fa-credit-card"></i>Cards</a></li>
+                        <li><a routerLink="/contact"><i class="fa fa-fw fa-envelope"></i>Contact</a></li>
+                    </ul>
+                </nav>
+            </div> 
+            <div class="col-sm-1">
+                <div class="dropdown">
+                    <a class="dropdown-toggle login-icon-background  no-underline text-custom-color" id="dropdownMenuButton" data-mdb-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-fw fa-user fa-2x icon-custom-color"></i>login
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item no-underline" routerLink="/login">Customer Login</a></li>
+                        <li><a class="dropdown-item no-underline" routerLink="/admin">Admin Login</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+
+                                       
         </div>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Customer Login</a></li>
-                <li><a href="#">Admin Login</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
     </div>
 </header>
 <br><br><br><br>
-<div class="container-fluid">
-  <div class="row h-100">
-    <div class="col-3"></div>
-      <div class="col-6">
-          <div class="bg" style="background-image: url('images/backpic.avif'); background-size: cover; background-position: center; height: 70vh;">
-              <div class="d-flex flex-column justify-content-center align-items-start h-100 text-white" style="padding-left: 2rem;">
-                  <h4 class="display-6" style="font-weight: bold; color: rgb(255, 255, 255);">Welcome to SoftBank</h4>
-                  <h5 class="display-9" style="font-weight: bold; color: rgb(208, 218, 218);">
-                      <b>Ensuring your safety and security.</b>
-                  </h5>
-                  <a href="#" class="btn btn-primary btn-register">Register Now</a>
-              </div>
-          </div>
-      </div>
-      <div class="col-3"></div>
-  </div>
-</div>
 
-
-<!-- Bootstrap JS, Popper.js, and jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<main>
+    <router-outlet></router-outlet>
+</main>
 
 
 

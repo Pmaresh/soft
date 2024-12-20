@@ -1,66 +1,105 @@
-@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
 header {
-  background: #027916;
-  height:80px;
-}
-
-header::after {
-  content: '';
-  display: table;
-  clear: both;
+  background: #008970;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
 }
 
 .logo {
-  padding: 0px 0;
-  line-height: 10px;
-  float: left;
-  color: #fff;
-  display: flex; 
+  display: flex;
   align-items: center;
-  margin-right: auto;
+  justify-content: center;
+  
 }
+
 nav {
-  float: right;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 nav ul {
   margin: 0;
   padding: 0;
-  list-style: none;
+  list-style:none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 nav li {
-  display: inline-block;
-  margin-left: 70px;
-  padding-top: 23px;
-
-  position: relative;
+  margin-left: 30px;
+  border:#008970;
 }
-
 nav a {
   color: #fcfafa;
-  text-decoration:double;
+  text-decoration: double;
   text-transform: uppercase;
   font-size: 14px;
+  position: relative;
 }
-
 nav a:hover {
-  color: #000;
+  color: #0e0202;
 }
-
-nav a::before {
-  content: '';
-  display: block;
-  height: 5px;
-  background-color: #444;
-
-  position: absolute;
-  top: 0;
-  width: 0%;
-
-  transition: all ease-in-out 250ms;
-}
-
 nav a:hover::before {
   width: 100%;
 }
+
+.col-sm-1, .col-sm-8 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dropdown:hover>.dropdown-menu {  
+    display: block;
+    
+    background-color: hsl(63, 90%, 81%);
+    min-width: 160px;
+    
+  }
+  
+
+
+.dropdown>.dropdown-toggle:active {
+  /*Without this, clicking will make it sticky*/
+    pointer-events: none;
+}
+.login-icon-background {
+  background: linear-gradient(135deg, #f85d37, #feb47b); /* Gradient background */
+  padding: 10px;
+  border-radius: 50%; /* Circular background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px; /* Adjust the width and height as needed */
+  height: 50px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+  transition: transform 0.3s ease; /* Smooth transformation */
+}
+
+.login-icon-background:hover {
+  transform: scale(1.1); /* Slightly increase size on hover */
+}
+.icon-custom-color {
+  color: #eef3f3; /* Change this to your preferred color */
+}
+
+.icon-custom-color:hover {
+  color: #f9faff; /* Optional: Different color on hover */
+}
+ a { 
+  text-decoration: none;
+ } 
+a:hover {
+  text-decoration: none;
+ }
+ .text-custom-color {
+  color:white; /* Change this to your preferred color */
+}
+
+.text-custom-color:hover {
+  color:white; /* Optional: Different color on hover */
+}
+
